@@ -20,39 +20,27 @@ namespace Bank
 
         public BankAccount CreateBankAccount(string vilketKonto) // Lägger upp ett konto åt kund
         {
-            BankAccount BankAccounts;
+            BankAccount createBankAccount;
 
             if (vilketKonto.Equals("CheckingAccount"))
             {
-                BankAccounts = new CheckingAccount();
+                createBankAccount = new CheckingAccount();
             }
 
             else if (vilketKonto.Equals("RetiermentAccount"))
 
             {
 
-                BankAccounts = new RetiermentAccount();
+                createBankAccount = new RetiermentAccount();
             }
 
             else
            
-                BankAccounts = new SavingsAccount();
+                createBankAccount = new SavingsAccount();
           
-            return BankAccounts;
+            return createBankAccount;
 
         }
-        //private void SetActiveBankAccount()
-        //{          
-        //    activeBankAccount = BankAccounts[0];           
-        //}
-        //public BankAccount GetActivBankAccount()
-        //{
-        //    SetActiveBankAccount(); 
-        //    return activeBankAccount;
-        //}
-
-
-
 
     }
 

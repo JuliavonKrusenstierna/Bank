@@ -6,51 +6,36 @@ namespace Bank
 {
     class CheckingAccount : BankAccount
     {
-
-        public static decimal Deposit(decimal inPut)
+        public void Deposit(decimal inPut)
         // Insättning
         {
             Balance += inPut;
-            return Balance;
+
         }
 
-        public static decimal Saldo(decimal Credit) // metod som räkna ut tillgängligt saldo 
-                                       // Tillgängligt saldo = kontots saldo + eventuell kredit
+        public override bool IsWithdrawPossible(decimal withdraw)
+        // Uttag(returvärde ska vara en bool)
         {
+            decimal creditToUse = 1000; 
+            Balance = Balance + creditToUse;
+
+            if (Balance > withdraw)
+            {
+                Balance = Balance - withdraw;
+                Balance = Balance - creditToUse;
+                return true;
+            }
+
+            else return false;
+        }
+
+
+        public override decimal Saldo(decimal Credit) // metod som räkna ut tillgängligt saldo 
+                                       // Tillgängligt saldo = kontots saldo + eventuell kredit
+        {  
             Balance = Balance + Credit;
             return Balance;
         }
-
-
-        public static bool IsWithdrawPossible(decimal Credit, decimal Balance, decimal withdraw)
-        // Uttag(returvärde ska vara en bool)
-
-        {         
-            Balance += Credit; 
-
-            if (Balance < withdraw)
-            {
-                return false;
-            }
-            else return true;
-        }
-
-        public static decimal MakeWithdraw(decimal Balance, decimal Credit, decimal withdraw, bool makeWithdraw)
-        {
-            Balance += Credit;
-            if (makeWithdraw.Equals(true))
-            {
-                Balance = Balance - withdraw;
-
-                return Balance;
-            }
-
-            return Balance;
-
-        }
-
-
-
 
     }
 }
