@@ -16,7 +16,7 @@ namespace Bank
 
             if (Balance > withdraw)
             {
-                Balance = Balance - withdraw - fee;
+                Balance = Balance - withdraw;
                 return true;
             }
 

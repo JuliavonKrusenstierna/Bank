@@ -15,7 +15,7 @@ namespace Bank
         {
             Balance += inPut;
          
-          }
+         }
         public virtual bool IsWithdrawPossible( decimal withdraw)
         // Uttag(returvärde ska vara en bool)
 
