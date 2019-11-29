@@ -18,16 +18,16 @@ namespace Bank
             BankAccounts = new List<BankAccount>(); // nytt objekt
         }
 
-        public BankAccount CreateBankAccount(string createAccount) // Lägger upp ett konto åt kund
+        public BankAccount CreateBankAccount(string vilketKonto) // Lägger upp ett konto åt kund
         {
             BankAccount createBankAccount;
 
-            if (createAccount.Equals("CheckingAccount"))
+            if (vilketKonto.Equals("CheckingAccount"))
             {
                 createBankAccount = new CheckingAccount();
             }
 
-            else if (createAccount.Equals("RetiermentAccount"))
+            else if (vilketKonto.Equals("RetiermentAccount"))
 
             {
 

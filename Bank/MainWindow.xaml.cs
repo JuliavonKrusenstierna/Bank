@@ -53,7 +53,12 @@ namespace Bank
             BankAccount retAcc= customer.CreateBankAccount("RetiermentAccount");
             customer.BankAccounts.Add(retAcc);
 
-            
+
+
+            saveAcc.AccountName();
+            checkAcc.AccountName();
+            retAcc.AccountName();
+
             saveAcc.Deposit(500);
             checkAcc.Deposit(400);
             retAcc.Deposit(300);

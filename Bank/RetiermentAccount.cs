@@ -6,7 +6,10 @@ namespace Bank
 {
     class RetiermentAccount : BankAccount
     {
-
+        public override void AccountName( )
+        {
+            AccountType = "Pensionskonto";
+        }
 
         public override bool IsWithdrawPossible(decimal withdraw)
         // Uttag(returvärde ska vara en bool)
@@ -22,7 +25,7 @@ namespace Bank
             else return false;
         }
 
-        
+       
 
     }
 }

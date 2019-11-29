@@ -6,6 +6,14 @@ namespace Bank
 {
     class CheckingAccount : BankAccount
     {
+
+
+        public override void AccountName()
+        {
+            AccountType = "Lönekonto";
+           
+        }
+
         public void Deposit(decimal inPut)
         // Insättning
         {
