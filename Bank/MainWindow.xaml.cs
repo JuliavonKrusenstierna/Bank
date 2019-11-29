@@ -44,46 +44,25 @@ namespace Bank
 
 
             // bankkonton skapas åt Kalle rik, han får tre konton
-            BankAccount bankAccount = customer.CreateBankAccount("SavingsAccount");
-            customer.BankAccounts.Add(bankAccount);
+            BankAccount saveAcc = customer.CreateBankAccount("SavingsAccount");
+            customer.BankAccounts.Add(saveAcc);
 
-            bankAccount = customer.CreateBankAccount("CheckingAccount");
-            customer.BankAccounts.Add(bankAccount);
+            BankAccount checkAcc = customer.CreateBankAccount("CheckingAccount");
+            customer.BankAccounts.Add(checkAcc);
 
-            bankAccount = customer.CreateBankAccount("RetiermentAccount");
-            customer.BankAccounts.Add(bankAccount);
+            BankAccount retAcc= customer.CreateBankAccount("RetiermentAccount");
+            customer.BankAccounts.Add(retAcc);
 
+            
+            saveAcc.Deposit(500);
+            checkAcc.Deposit(400);
+            retAcc.Deposit(300);
 
-           
-
-            decimal inPut = 0;
-
-            RetiermentAccount retiermentAccount = new RetiermentAccount();
-            inPut = 1100;
-            retiermentAccount.Deposit(inPut);
-
-            SavingsAccount savingsAccount = new SavingsAccount();
-            inPut = 400;
-            savingsAccount.Deposit(inPut);
-
-
-            CheckingAccount checkingAccount = new CheckingAccount();
-            inPut = 500;
-            checkingAccount.Deposit(inPut);
-
-
-
-            decimal withdrawal = 0;
-
-
-            withdrawal = 600;
-            retiermentAccount.IsWithdrawPossible(withdrawal);
-
-            withdrawal = 200;
-            savingsAccount.IsWithdrawPossible(withdrawal);
-
-            withdrawal = 500;
-            checkingAccount.IsWithdrawPossible(withdrawal);
+            saveAcc.IsWithdrawPossible(200);
+            checkAcc.IsWithdrawPossible(200);
+            retAcc.IsWithdrawPossible(200);
+ 
+   
         }
     }
 
