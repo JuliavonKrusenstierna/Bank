@@ -13,9 +13,9 @@ namespace Bank
         public void  Deposit (decimal inPut)
         // Insättning
         {
-            Balance += inPut;
-         
+            Balance += inPut;        
          }
+
         public virtual bool IsWithdrawPossible( decimal withdraw)
         // Uttag(returvärde ska vara en bool)
 
