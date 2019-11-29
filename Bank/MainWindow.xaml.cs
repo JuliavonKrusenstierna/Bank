@@ -30,7 +30,7 @@ namespace Bank
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // kund skapas och ska läggas i en lista, vi får skapa kunden här och spara listan här tillsvidare
+            // kund skapas och ska läggas i en lista
             List<Customer> customers;
             customers = new List<Customer>();
             customer = new Customer()
@@ -54,8 +54,7 @@ namespace Bank
             customer.BankAccounts.Add(bankAccount);
 
 
-            // startscenario, Kalle rik är dock fattig för han har 0 kr på alla konton från början men vinner 2000kr. 
-            // Han sätter in pegnarna enligt nedan.
+           
 
             decimal inPut = 0;
 
@@ -73,11 +72,6 @@ namespace Bank
             checkingAccount.Deposit(inPut);
 
 
-            // insättningarna görs framgångsrikt. Allt är nästan frid och fröjd
-
-
-
-            //Kalle Rik är dock en slösaktig man och sätter genast på sig spenderarbyxorna och tar ut pengar enligt följande.
 
             decimal withdrawal = 0;
 

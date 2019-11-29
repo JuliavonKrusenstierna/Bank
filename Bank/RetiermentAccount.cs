@@ -12,9 +12,8 @@ namespace Bank
         // Uttag(returvärde ska vara en bool)
         {
             decimal fee = withdraw/10;
-            Balance = Balance - fee;
 
-            if (Balance > withdraw)
+            if (Balance - fee> withdraw)
             {
                 Balance = Balance - withdraw;
                 return true;
