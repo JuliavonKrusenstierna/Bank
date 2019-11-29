@@ -23,6 +23,8 @@ namespace Bank
     public partial class MainWindow : Window
     {
         Customer customer;
+        List<Customer> customers = new List<Customer>();
+
         public MainWindow()
         {
             InitializeComponent();                           
@@ -30,9 +32,7 @@ namespace Bank
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // kund skapas och ska läggas i en lista
-            List<Customer> customers;
-            customers = new List<Customer>();
+
             customer = new Customer()
             {
                 Firstnamne = "Kalle",
