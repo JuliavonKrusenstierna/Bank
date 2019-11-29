@@ -7,8 +7,8 @@ namespace Bank
     class BankAccount
     {
         public string AccountType { get; set; } 
-        public decimal Balance { get; set; } 
-        public decimal Credit { get; set; } 
+        public decimal Balance { get; protected set; } 
+        public decimal Credit { get; protected set; } 
 
         public void  Deposit (decimal inPut)
         // Insättning

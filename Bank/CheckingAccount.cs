@@ -16,13 +16,11 @@ namespace Bank
         public override bool IsWithdrawPossible(decimal withdraw)
         // Uttag(returvärde ska vara en bool)
         {
-            decimal creditToUse = 1000; 
-            Balance = Balance + creditToUse;
-
-            if (Balance > withdraw)
+             
+            if (Balance + Credit > withdraw)
             {
-                Balance = Balance - withdraw;
-                Balance = Balance - creditToUse;
+                Balance -= withdraw;
+                
                 return true;
             }
 
