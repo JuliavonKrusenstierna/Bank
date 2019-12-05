@@ -6,32 +6,33 @@ namespace Bank
 {
     class Customer
     {
-        BankAccount activeBankAccount;
-
         public string Firstnamne { get; set; }
         public string Lastnamne { get; set; }
-        public string Address { get; set; }
         public string Cellphone { get; set; }
+
         public List<BankAccount> BankAccounts { get; set; } //Association till BankAccount
         public Customer() // Konstruktor som körs när ett nytt objekt skapas
         {
             BankAccounts = new List<BankAccount>(); // nytt objekt
         }
 
-        public BankAccount CreateBankAccount(string vilketKonto) // Lägger upp ett konto åt kund
+        public BankAccount CreateBankAccount(string newAccount) // Lägger upp ett konto åt kund
         {
             BankAccount createBankAccount;
 
-            if (vilketKonto.Equals("CheckingAccount"))
+
+            if (newAccount.Equals("CheckingAccount"))
             {
-                createBankAccount = new CheckingAccount();
+                createBankAccount = new CheckingAccount(); 
+             
             }
 
-            else if (vilketKonto.Equals("RetiermentAccount"))
+            else if (newAccount.Equals("RetiermentAccount"))
 
             {
 
                 createBankAccount = new RetiermentAccount();
+
             }
 
             else
@@ -40,6 +41,17 @@ namespace Bank
           
             return createBankAccount;
 
+        }
+
+        public override string ToString()
+        {
+            return $"{Firstnamne} {Lastnamne}";
+        }
+
+        public List<BankAccount> GetBankAccounts()
+        {
+
+            return BankAccounts; 
         }
 
     }

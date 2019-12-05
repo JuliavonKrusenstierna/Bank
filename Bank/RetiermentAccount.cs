@@ -6,9 +6,11 @@ namespace Bank
 {
     class RetiermentAccount : BankAccount
     {
-        public override void AccountName( )
+
+        public RetiermentAccount()
         {
-            AccountType = "Pensionskonto";
+            AccountType = "Pensionskonto:";
+
         }
 
         public override bool IsWithdrawPossible(decimal withdraw)

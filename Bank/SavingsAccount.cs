@@ -7,10 +7,10 @@ namespace Bank
     class SavingsAccount : BankAccount
     {
 
-        public override void AccountName()
+        public SavingsAccount()
         {
-            AccountType = "Sparkonto";
-
+        AccountType = "Sparkonto:";
+          
         }
 
     }

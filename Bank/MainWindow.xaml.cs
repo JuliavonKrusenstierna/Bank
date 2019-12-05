@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,68 +8,162 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Bank
 {
-
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        Customer customer;
-        List<Customer> customers = new List<Customer>();
+        Customer newCustomer;
+        List<Customer> listOfCustomers = new List<Customer>();
 
         public MainWindow()
         {
-            InitializeComponent();                           
+            InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// Kod för att välja kund i ComboBoxen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
+
+        private void BtnSelectCustomer_Click(object sender, RoutedEventArgs e) 
+        {
+            Customer selcetedCustomer = (Customer)CboCustomer.SelectedItem;
+
+            if (selcetedCustomer != null)
+            {
+                CboSelectAccount.ItemsSource = null;
+                CboSelectAccount.ItemsSource = selcetedCustomer.GetBankAccounts();
+                CboSelectAccount.SelectedIndex = 0;
+
+            }
+
+        }
+
+
+        /// <summary>
+        /// Kod för att välja konto från aktiv kund
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnSelectAccount_Click(object sender, RoutedEventArgs e) // välj konto
         {
 
-            customer = new Customer()
-            {
-                Firstnamne = "Kalle",
-                Lastnamne = "Rik",
-                Cellphone = "999 999 99 99",
-                Address = "Guldgruvan 1"
-            };
-            customers.Add(customer);
-
-
-            // bankkonton skapas åt Kalle rik, han får tre konton
-            BankAccount saveAcc = customer.CreateBankAccount("SavingsAccount");
-            customer.BankAccounts.Add(saveAcc);
-
-            BankAccount checkAcc = customer.CreateBankAccount("CheckingAccount");
-            customer.BankAccounts.Add(checkAcc);
-
-            BankAccount retAcc= customer.CreateBankAccount("RetiermentAccount");
-            customer.BankAccounts.Add(retAcc);
-
-
-
-            saveAcc.AccountName();
-            checkAcc.AccountName();
-            retAcc.AccountName();
-
-            saveAcc.Deposit(500);
-            checkAcc.Deposit(400);
-            retAcc.Deposit(300);
-
-            saveAcc.IsWithdrawPossible(200);
-            checkAcc.IsWithdrawPossible(200);
-            retAcc.IsWithdrawPossible(200);
- 
-   
+            BankAccount selcetedBankAccount = (BankAccount)CboSelectAccount.SelectedItem;
+        
         }
-    }
+
+        /// <summary>
+        /// Insättningar och uttag från valt bankkonto = en transaktion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnSaveTransaction_Click(object sender, RoutedEventArgs e)
+        {
+            BankAccount selcetedBankAccount = (BankAccount)CboSelectAccount.SelectedItem;
+            decimal amount = decimal.Parse(TxtAmount.Text);
 
 
+            if (selcetedBankAccount != null)
+            {
+
+                if (OptWithdrawal.IsChecked == true)
+                {
+                    bool possible = selcetedBankAccount.IsWithdrawPossible(amount);
+
+                    if (possible == false)
+                    { MessageBox.Show("Du saknar täckning på kontot"); }
+
+                }
+
+                else if (OptDeposit.IsChecked == true)
+                {
+                    selcetedBankAccount.Deposit(amount);
+
+                }
+
+            }
+
+        }
+
+        /// <summary>
+        /// Skapa ny kund
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnNewCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            newCustomer = new Customer() // Skapar en ny kund
+            {
+                Firstnamne = TxtFirstname.Text,
+                Lastnamne = TxtLastname.Text,
+                Cellphone = TxtPhone.Text,
+            }; 
+            listOfCustomers.Add(newCustomer); // lägger till kunden i min lista av kunder 
+
+            TxtFirstname.Clear(); // rensar alla textboxar
+            TxtLastname.Clear();
+            TxtPhone.Clear();
+
+            CboCustomer.ItemsSource = null; // lägger in kunden i listan av valbara kunder
+            CboCustomer.ItemsSource = listOfCustomers;
+            CboCustomer.SelectedIndex = 0;
+
+
+
+
+        } // Skapar ny kund Jag tog bort adress
+
+        /// <summary>
+        /// Skapa nytt bankkonto till aktiv kund
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnNewAccount_Click(object sender, RoutedEventArgs e) // behöver lägga till Credit från textbox med namn TxtCredit
+        {
+
+            Customer selcetedCustomer = (Customer)CboCustomer.SelectedItem;
+
+            if (selcetedCustomer != null)
+            {
+                if (OptChecking.IsChecked == true)
+                {
+                    BankAccount checkAcc = selcetedCustomer.CreateBankAccount("CheckingAccount");
+                    {
+                        decimal getCredit = decimal.Parse(TxtCredit.Text); // hämtar Crediten              
+                        checkAcc.GetCredit(getCredit);
+
+                    }
+                    checkAcc.AccountName();
+
+
+                    selcetedCustomer.BankAccounts.Add(checkAcc);
+                }
+
+                else if (OptSavings.IsChecked == true)
+                {
+                    BankAccount saveAcc = selcetedCustomer.CreateBankAccount("SavingsAccount");
+                    saveAcc.AccountName();
+                    selcetedCustomer.BankAccounts.Add(saveAcc);
+                }
+
+                else if (OptRetirement.IsChecked == true)
+                {
+                    BankAccount retAcc = selcetedCustomer.CreateBankAccount("RetiermentAccount");
+                    retAcc.AccountName();
+                    selcetedCustomer.BankAccounts.Add(retAcc);
+                }
+            }
+
+        }
+
+        }
 
 }
-

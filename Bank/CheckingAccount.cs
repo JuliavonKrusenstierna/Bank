@@ -7,12 +7,12 @@ namespace Bank
     class CheckingAccount : BankAccount
     {
 
-
-        public override void AccountName()
+        public CheckingAccount()
         {
-            AccountType = "Lönekonto";
-           
+            AccountType = "Lönekonto:";
+
         }
+
 
         public void Deposit(decimal inPut)
         // Insättning
@@ -36,9 +36,10 @@ namespace Bank
         }
 
 
-        public override decimal Saldo(decimal Credit) // metod som räkna ut tillgängligt saldo 
+        public override decimal Saldo() // metod som räkna ut tillgängligt saldo 
                                        // Tillgängligt saldo = kontots saldo + eventuell kredit
-        {  
+        {
+            Credit = 0; 
             Balance = Balance + Credit;
             return Balance;
         }
