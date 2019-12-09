@@ -51,10 +51,7 @@
         </StackPanel>
 
         <!-- Visa kontoutdrag (om du gjort bonusdelen med transaktioner). Detta kan du radera om du vill -->
-        <StackPanel Grid.Column="1" Grid.Row="4" Margin="20,20,20,5">
-            <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="5,0,0,0" Text="Kontoutdrag" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift Light" FontSize="18"/>
-            <ListBox x:Name="LstTransactions"  MinHeight="150"/>
-        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="4" Margin="20,20,20,5"/>
 
         <!-- Sätt in och ta ut pengar från markerat konto -->
         <StackPanel Grid.Row="3" Grid.Column="1" Margin="20,20,5,5">

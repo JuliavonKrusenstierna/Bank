@@ -17,9 +17,9 @@
         <ListBox x:Name="ListBox" Margin="188,45,249,167"/>
         <Button x:Name="GiveCandy1" Content="Fördela godisar" HorizontalAlignment="Left" Margin="424,192,0,0" VerticalAlignment="Top" Click="Button_Click_1" Height="24" Width="100"/>
         <Button x:Name="SaveCandy" Content="Spara" HorizontalAlignment="Left" Margin="424,225,0,0" VerticalAlignment="Top" Width="100" Click="SaveCandy_Click"/>
-        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="446,62,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="BtnAge" Content="Ålder" HorizontalAlignment="Left" Margin="448,42,0,0" VerticalAlignment="Top"/>
-        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="448,87,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="BtnLetter" Content="Bokstavsordning" HorizontalAlignment="Left" Margin="446,62,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="BtnAge" Content="Ålder" HorizontalAlignment="Left" Margin="446,41,0,0" VerticalAlignment="Top" Height="15" Width="93"/>
+        <RadioButton x:Name="BtnOriginal" Content="Orginalformat" HorizontalAlignment="Left" Margin="446,82,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

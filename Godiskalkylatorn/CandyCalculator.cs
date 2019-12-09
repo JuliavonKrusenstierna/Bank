@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Linq; 
+using System.Linq;
 
 namespace Godiskalkylatorn
 {
-    class CandyCalculator : Person
+    [Serializable]
+
+    class CandyCalculator : Person 
     {
-
-//        Om jag hade gjort på rätt sätt
-//Skapa en klass med personer och istället hade en lista av typen person.
-//Varje person massa egenskaper.
-//Då kan man plocka ut egenskaperna. 
-
-
         public int NumberOfCandies { get; set; }
 
 
@@ -22,75 +17,104 @@ namespace Godiskalkylatorn
         public CandyCalculator() // Konstruktor som körs när ett nytt objekt skapas
         {
             people = new List<Person>(); // nytt objekt
-
         }
 
         public List<Person> GetPeople()
         {
             return people;
-        }
+        } // orginallistan
 
-        public void AddPerson(Person person)
+        public List<Person> GetPeopleByName()
         {
-          
+            return people.OrderBy(x => x.Name).ToList();
+        } // metod för att sortera listan efter namn
+
+        public List<Person> GetPeopleByAge()
+        {
+            return people.OrderBy(x => x.Age).ToList();
+        } // metod för att sortera listan efter ålder
+
+        public void AddPerson(string name, int age)
+        {
+            Person person = new Person()
+            {
+                Name = name,
+                Age = age
+            };
+
             people.Add(person);
 
-        }
+        } // metod för att lägga till en person i listan
 
-        public int DivideCandy(int inPutCandies)
+        public int DivideCandy(int inPutCandies)  // Metod som fördelar godisarna rättvist, även resten 
         {
 
             NumberOfCandies = inPutCandies / people.Count;
+           int restCandy = inPutCandies % people.Count;
 
             foreach (Person person in people)
             {
-                person.Candies = NumberOfCandies;
+                if (restCandy > 0)
+                {
+
+                    person.Candies = NumberOfCandies + 1;
+                    restCandy--;
+
+                }
+
+                else
+                    person.Candies = NumberOfCandies;
             }
             return Candies;
 
         }
 
-        public List<Person> DivideCandyByAge(int inPutCandies)           
+        public void DivideCandyByAge(int inPutCandies)           // Metod som fördelar godisar efter ålder
 
         {
+            int restCandy = 0;
             NumberOfCandies = inPutCandies / people.Count;
-            foreach (Person person in people.OrderBy(x => x.Age))
+            restCandy = inPutCandies % people.Count;
+
+            foreach (Person person in GetPeopleByAge())
             {
-                person.Candies = NumberOfCandies;
+                if (restCandy > 0)
+                {
+                    person.Candies = NumberOfCandies + 1;
+                    restCandy--;                 
+                }
+
+                else
+                    person.Candies = NumberOfCandies;
             }
-
-            return people.OrderBy(x => x.Age).ToList();
-          
         }
+    
 
-        public List<Person> DivideCandyByName(int inPutCandies)
+        public void DivideCandyByName(int inPutCandies)
 
-        {
+        {        
             NumberOfCandies = inPutCandies / people.Count;
-            foreach (Person person in people.OrderBy(x => x.Name))
+            int restCandy = inPutCandies % people.Count;
+
+            foreach (Person person in GetPeopleByName())
             {
-                person.Candies = NumberOfCandies;
-            }
+                if (restCandy > 0)
+                {                
+                    person.Candies = NumberOfCandies + 1;
+                    restCandy--;
+                }
 
-            return people.OrderBy(x => x.Name).ToList();
+                else
+                    person.Candies = NumberOfCandies;
+            }          
+        } // metod som fördelar godisar efter namn
 
-        }
-            
+
+
+
+
     }
 
-
-
-
-    //   Metoder // kolla upp hur man gör med resten
-
-    // Avklarade
-    // AddPerson
-    //CandyCalculator
-    //GetPeople
-    //DivideCandyByAge
-    //DivideCandyByName
-
 }
-
 
 

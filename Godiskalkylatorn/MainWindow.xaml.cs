@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,46 +22,74 @@ namespace Godiskalkylatorn
     /// </summary>
     public partial class MainWindow : Window
     {
-        CandyCalculator candyCalculator; 
+       const string fileName = "savedList.bin";
 
-        public MainWindow()
+        CandyCalculator candyCalculator;
+        Person person; 
+        public MainWindow() // startläget, kollar om jag har någon startad fil om ja, visas dessa, annars skapas nya objekt
         {
             InitializeComponent();
 
-        }
+            if (File.Exists(fileName))
+            {
+                candyCalculator = (CandyCalculator)FileOperations.Deserialize(fileName);
+            }
 
+            else
+
+            {
+                candyCalculator = new CandyCalculator();
+                person = new Person();
+            }
+            ListBox.ItemsSource = null;
+            ListBox.ItemsSource = candyCalculator.GetPeople();
+
+        }
 
 
         private void SaveCandy_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        {           
+            FileOperations.Serialize(candyCalculator, "savedList.bin");
+        }  // spar mitt program
+       
         private void BtnAddPerson_Click(object sender, RoutedEventArgs e)
         {
             string name = InputNamne.Text;
-            int age = int.Parse(InPutAge.Text); 
+            int age = int.Parse(InPutAge.Text);
 
-            Person person = new Person();
-            CandyCalculator candyCalculator = new CandyCalculator();
-            
-            candyCalculator.AddPerson(person);
+            candyCalculator.AddPerson(name, age);
+         } // lägger till nya personer
 
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e) // knapp som fördelar godisar efter önskad sortering
         {
+            int input = int.Parse(InNumOfC.Text); 
 
-            int du = 10;
+            if (BtnAge.IsChecked == true)
+            {
+                candyCalculator.DivideCandyByAge(input);
+                ListBox.ItemsSource = null;
+                ListBox.ItemsSource = candyCalculator.GetPeopleByAge();
+            }
+
+            if (BtnLetter.IsChecked == true)
+            {
+                candyCalculator.DivideCandyByName(input);
+                ListBox.ItemsSource = null;
+                ListBox.ItemsSource = candyCalculator.GetPeopleByName();
+            }
+
+            if (BtnOriginal.IsChecked == true)
+            {
+                candyCalculator.DivideCandy(input);
+                ListBox.ItemsSource = null;
+                ListBox.ItemsSource = candyCalculator.GetPeople();
+            }
 
 
-            candyCalculator.DivideCandy(du);
 
-            ListBox.ItemsSource = null; // lägger in kunden i listan av valbara kunder
-            ListBox.ItemsSource = candyCalculator.GetPeople(); 
-            ListBox.SelectedIndex = 0;
         }
+
+
     }
 
 
