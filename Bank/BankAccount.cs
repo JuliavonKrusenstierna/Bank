@@ -10,31 +10,27 @@ namespace Bank
         public decimal Balance { get; protected set; }
         public decimal Credit { get; set; }
 
-        public virtual string AccountName()
+        public virtual string AccountName() 
         {
             return AccountType;
         }
 
         public void Deposit(decimal inPut)
-        // Insättning
+       
         {
             Balance += inPut;
         }
 
 
-        public decimal GetCredit(decimal input) 
+
+        public decimal GetCredit(decimal input) // hämtar kretiden till lönekonto
         {
-
             Credit += input;
-        return Credit; 
-    } 
+            return Credit; 
+        }
 
-
-
-
-        public virtual bool IsWithdrawPossible( decimal withdraw)
-        // Uttag(returvärde ska vara en bool)
-
+        public virtual bool IsWithdrawPossible( decimal withdraw) // Kollar om uttag är möjligt. Ej egen metod för lönekontot.
+ 
         {
             if (Balance > withdraw)
             {
@@ -48,8 +44,8 @@ namespace Bank
         }
 
         public virtual decimal Saldo() // metod som räkna ut tillgängligt saldo 
-                               // Tillgängligt saldo = kontots saldo + eventuell kredit
-        {        
+                               
+        {
             return Balance; 
         }
 

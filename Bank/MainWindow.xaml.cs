@@ -36,12 +36,13 @@ namespace Bank
         private void BtnSelectCustomer_Click(object sender, RoutedEventArgs e) 
         {
             Customer selcetedCustomer = (Customer)CboCustomer.SelectedItem;
+          
 
             if (selcetedCustomer != null)
             {
                 CboSelectAccount.ItemsSource = null;
                 CboSelectAccount.ItemsSource = selcetedCustomer.GetBankAccounts();
-                CboSelectAccount.SelectedIndex = 0;
+                 CboSelectAccount.SelectedIndex = 0;
 
             }
 
@@ -89,6 +90,9 @@ namespace Bank
 
                 }
 
+                TxtAmount.Clear();
+             
+
             }
 
         }
@@ -119,14 +123,14 @@ namespace Bank
 
 
 
-        } // Skapar ny kund Jag tog bort adress
+        } // Skapar ny kund. Jag tog bort adress
 
         /// <summary>
         /// Skapa nytt bankkonto till aktiv kund
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnNewAccount_Click(object sender, RoutedEventArgs e) // behöver lägga till Credit från textbox med namn TxtCredit
+        private void BtnNewAccount_Click(object sender, RoutedEventArgs e) 
         {
 
             Customer selcetedCustomer = (Customer)CboCustomer.SelectedItem;
@@ -139,7 +143,8 @@ namespace Bank
                     {
                         decimal getCredit = decimal.Parse(TxtCredit.Text); // hämtar Crediten              
                         checkAcc.GetCredit(getCredit);
-
+                        checkAcc.Saldo();
+                        
                     }
                     checkAcc.AccountName();
 
@@ -151,6 +156,7 @@ namespace Bank
                 {
                     BankAccount saveAcc = selcetedCustomer.CreateBankAccount("SavingsAccount");
                     saveAcc.AccountName();
+                    saveAcc.Saldo();
                     selcetedCustomer.BankAccounts.Add(saveAcc);
                 }
 
@@ -158,6 +164,7 @@ namespace Bank
                 {
                     BankAccount retAcc = selcetedCustomer.CreateBankAccount("RetiermentAccount");
                     retAcc.AccountName();
+                    retAcc.Saldo();
                     selcetedCustomer.BankAccounts.Add(retAcc);
                 }
             }

@@ -13,8 +13,8 @@ namespace Bank
 
         }
 
-        public override bool IsWithdrawPossible(decimal withdraw)
-        // Uttag(returvärde ska vara en bool)
+        public override bool IsWithdrawPossible(decimal withdraw) // kollar om uttag är möjligt. Tar hänsyn till avgiften.
+       
         {
             decimal fee = withdraw/10;
 
