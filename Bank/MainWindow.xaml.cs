@@ -123,7 +123,7 @@ namespace Bank
 
 
 
-        } // Skapar ny kund. Jag tog bort adress
+        } 
 
         /// <summary>
         /// Skapa nytt bankkonto till aktiv kund

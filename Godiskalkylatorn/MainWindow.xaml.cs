@@ -58,7 +58,9 @@ namespace Godiskalkylatorn
             int age = int.Parse(InPutAge.Text);
 
             candyCalculator.AddPerson(name, age);
-         } // lägger till nya personer
+            ListBox.ItemsSource = null;
+            ListBox.ItemsSource = candyCalculator.GetPeople();
+        } // lägger till nya personer
 
         private void Button_Click_1(object sender, RoutedEventArgs e) // knapp som fördelar godisar efter önskad sortering
         {

@@ -32,7 +32,7 @@ namespace Bank
         public virtual bool IsWithdrawPossible( decimal withdraw) // Kollar om uttag är möjligt. Ej egen metod för lönekontot.
  
         {
-            if (Balance > withdraw)
+            if (Balance >= withdraw)
             {
                 Balance = Balance - withdraw;
                 return true;
